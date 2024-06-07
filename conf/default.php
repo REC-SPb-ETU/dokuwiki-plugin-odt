@@ -57,3 +57,5 @@ $conf['olist_label_align'] = 'right';
 
 // Conversion options
 $conf['convert_to_pdf'] = 'libreoffice --headless --convert-to pdf --outdir %outdir% %sourcefile% 2>&1';
+// URL for jirainfo plugin export
+$conf['jira_link'] = 'http://your-jira-url/jira/browse/';

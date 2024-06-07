@@ -628,6 +628,33 @@ class renderer_plugin_odt_page extends Doku_Renderer {
     }
 
     /**
+     * Render exernallink for jirainfo plugin.
+     *
+     * @param string $name
+     * @param array $data
+     * @param int|string $state
+     * @param string $match
+     */
+    function plugin($name, $data, $state = '', $match = '') {
+        if ($name == "jirainfo") {
+            list($dataState, $dataMatch) = $data;
+            switch ($dataState) {
+                case DOKU_LEXER_ENTER:
+                    $this->doc = $data[1];
+                    break;
+                case DOKU_LEXER_UNMATCHED:
+                    if ($this->doc != '') {
+                        $this->externallink($this->getConf('jira_link').$this->doc, $dataMatch);
+                        $this->doc = '';
+                    }
+                    break;
+                case DOKU_LEXER_EXIT:
+                    break;
+            }
+        }
+    }
+
+    /**
      * Open a paragraph.
      *
      * @param string $style Name of the style to use for the paragraph
